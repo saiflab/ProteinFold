@@ -3,7 +3,7 @@ from Bio import SeqIO
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 import tempfile
-import nglview as nv
+import os
 
 def predict_structure(sequence):
     with tempfile.NamedTemporaryFile(delete=False, suffix=".fasta") as temp_fasta:
@@ -28,10 +28,10 @@ if st.button("Predict Structure"):
         with st.spinner('Predicting protein structure...'):
             pdb_file = predict_structure(sequence_input)
             st.success("Structure prediction complete!")
-            view = nv.show_file(pdb_file)
-            # Render the view directly in Streamlit without using matplotlib
-            st.write(view)
+            st.text("PDB File Content:")
+            with open(pdb_file, "r") as file:
+                st.text(file.read())
         with open(pdb_file, "rb") as file:
-            st.download_button(label="Download PDB File", data=file, file_name="predicted_structure.pdb", mime="chemical/x-pdb")
+            btn = st.download_button(label="Download PDB File", data=file, file_name="predicted_structure.pdb", mime="chemical/x-pdb")
     else:
         st.error("Please input an amino acid sequence.")
