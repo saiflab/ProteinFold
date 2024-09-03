@@ -1,3 +1,4 @@
+pip>=24.2  # Ensure pip is at least version 24.2
 streamlit==1.24.0
 biopython==1.81
 nglview==3.0.0
