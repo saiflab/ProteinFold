@@ -1,3 +1,4 @@
 streamlit==1.25.0
 biopython==1.81
 nglview==3.0.4
+Pillow==9.0.1
